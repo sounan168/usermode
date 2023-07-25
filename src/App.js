@@ -1,25 +1,51 @@
-import logo from './logo.svg';
+import React, { useState ,useEffect} from 'react';
 import './App.css';
-
+import Content from './content/Content';
+// import { useContext } from 'react';
+import { CustomContext,ip } from './context/Context';
+import { useNavigate,} from 'react-router-dom';
+import axios from 'axios';
+// import scan from './component/scan.mp3'
 function App() {
+const [brand, setbrand] = useState(true);
+const [loading, setloading] = useState(true);
+
+  const [result,setresult] = useState(null)
+  const navigate = useNavigate();
+   //size
+   const [screenSize, setScreenSize] = useState(getCurrentDimension());
+
+  	function getCurrentDimension(){
+    	return {
+      		width: window.innerWidth,
+      		height: window.innerHeight
+    	}
+  	}
+  
+  	useEffect(() => {
+    		const updateDimension = () => {
+      			setScreenSize(getCurrentDimension())
+    		}
+    		window.addEventListener('resize', updateDimension);
+    
+		
+    		return(() => {
+        		window.removeEventListener('resize', updateDimension);
+    		})
+  	}, [screenSize])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  
+    <>
+    <CustomContext.Provider value={{ip,result,screenSize,brand,setbrand,loading,setloading}}>
+        <Content/>
+    </CustomContext.Provider>
+      
+    </>
+   )
+      
+   
+
 }
 
 export default App;
