@@ -4,13 +4,12 @@ import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCircleXmark,faCircleCheck} from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react';
-import { CustomContext } from '/home/sounan/Desktop/React/testapp/src/context/Context.js';
+import { CustomContext } from 'D:/project/usermode/src/context/Context';
 const Weekly = () =>{
     const {ip} = useContext(CustomContext)
         const [att,setatt] = useState([])
         useEffect(()=>{
-            axios.get(`${ip}/api/getatt?id=${localStorage.getItem('id')}&Date=1 week`).then((e)=>{
-                console.log(e.data.data)
+            axios.get(`${ip}/api/getatt?id=${localStorage.getItem('id')}&date=1 week`).then((e)=>{
                 setatt(e.data.data)
             }).catch(e=>alert(e));
            

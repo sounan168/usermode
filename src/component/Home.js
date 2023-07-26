@@ -24,9 +24,10 @@ const Home = (props) => {
     axios
       .get(`${ip}/api/userdetail?id=${id}`)
       .then((respone) => {
-        let data = JSON.parse(respone.data);
+        // let data = JSON.parse(respone.data);
         // setscrc(data.Profile);
-        setdetail(data)
+        console.log(respone.data[0]);
+        setdetail(respone.data[0])
       }).catch(e=>alert(e));
     setsex(localStorage.getItem("sex"));
   }, [id,ip]);
