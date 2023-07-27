@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCircleXmark,faCircleCheck} from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react';
-import { CustomContext } from 'D:/project/usermode/src/context/Context';
+import { CustomContext } from 'E:/usermode/usermode/src/context/Context';
 const Weekly = () =>{
     const {ip} = useContext(CustomContext)
         const [att,setatt] = useState([])

@@ -33,9 +33,9 @@ const Home = (props) => {
   }, [id,ip]);
   const checksex = () => {
     if (sex !== "F") {
-      return "avatar4.png";
+      return "man_318-233556.avif";
     } else {
-      return "avatar3.png";
+      return "kisspng-portable-network-graphics-vector-graphics-customer-5c033c289a6bf4.9912322615437158806325.jpg";
     }
   };
   return (

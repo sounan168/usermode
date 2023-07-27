@@ -14,7 +14,7 @@ const Checkin = () =>{
     const cl = useRef(null)
     const check = useRef(null)
     useEffect(()=>{
-        axios.get(`${ip}/api/getbc?bid=${bd}`)
+        axios.get(`${ip}/api/getbc/${bd}`)
         .then((e)=>{
             
            setbuilding(e.data.building)
@@ -28,9 +28,9 @@ const Checkin = () =>{
     const submit = () => {
         let classid = cl.current.value
         let ch = check.current.value
-        axios.post(`${ip}/api/checkin?class=${classid}&id=${localStorage.getItem('id')}&check=${ch}`).then((e)=>{
-                setmessage(e.data[0])
-                console.log(e.data[0])
+        axios.post(`${ip}/api/checkin/${localStorage.getItem('id')}/${classid}/${ch}`).then((e)=>{
+                setmessage(e.data)
+                console.log(e.data)
         }).catch((e)=>{
             setmessage(e)
         })

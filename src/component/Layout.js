@@ -29,7 +29,7 @@ function Layout (props){
       {/* {url} */}
           <Container fluid className="p-0">
           <Link to={'/home'} style={{display:screenSize.width>500?'none':'',color:'black',fontSize:'30px',opacity:url==='/home'?'0':''}}><FontAwesomeIcon icon={faArrowLeft}/></Link>
-            <Navbar.Brand href="#"><img alt="LOGO" src={`${ip}/dist/img/num.png`} style={{width:'50px'}} /></Navbar.Brand>
+            <Navbar.Brand href="#"><img alt="LOGO" src={`${ip}/dist/img/num.png`} style={{width:'70px'}} /></Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} style={{display:screenSize.width>500?'':'none'}}/>
             
             <Navbar.Offcanvas

@@ -47,9 +47,16 @@ const Login =()=>{
 
     return(
         <Container>
-           
-        <Form noValidate validated={validated}>
+           <div className='row'>
+            <div className='col-md-4'></div>
+            <div className='col-md-4'>
+
+            <Form noValidate validated={validated}>
       <Row className="mb-3">
+      <div style={{textAlign:'center'}}>
+        <img src={`${ip}/image/num.png`} alt="" style={{width:'150px'}}/>
+      </div>
+      <h1 className='text-center'>Login</h1>
         <Form.Group as={Col} md="12" controlId="validationCustom01">
           <Form.Label>ID</Form.Label>
           <Form.Control
@@ -74,7 +81,7 @@ const Login =()=>{
           <Form.Label>Password</Form.Label>
           <Form.Control
             required
-            type="text"
+            type="password"
             placeholder="Password"
             onChange={e=>setpass(e.target.value)}
           />
@@ -85,6 +92,11 @@ const Login =()=>{
         
       <Button onClick={handleSubmit}>Submit form</Button>
     </Form>
+
+            </div>
+            <div className='col-md-4'></div>
+           </div>
+       
     </Container>
     )
 }
