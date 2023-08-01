@@ -12,6 +12,7 @@ const [loading, setloading] = useState(true);
 
   const [result,setresult] = useState(null)
   const navigate = useNavigate();
+  const [imgs, setimgs] = useState();
    //size
    const [screenSize, setScreenSize] = useState(getCurrentDimension());
 
@@ -23,6 +24,11 @@ const [loading, setloading] = useState(true);
   	}
   
   	useEffect(() => {
+		axios
+		.get(`${ip}/api/userdetail?id=${localStorage.getItem("id")}`)
+		.then((respone) => {
+		  setimgs(respone.data[0].Profile);
+		}).catch(e=>alert(e));
     		const updateDimension = () => {
       			setScreenSize(getCurrentDimension())
     		}
@@ -37,7 +43,7 @@ const [loading, setloading] = useState(true);
   return (
   
     <>
-    <CustomContext.Provider value={{ip,result,screenSize,brand,setbrand,loading,setloading}}>
+    <CustomContext.Provider value={{ip,result,screenSize,brand,setbrand,loading,setloading,imgs}}>
         <Content/>
     </CustomContext.Provider>
       

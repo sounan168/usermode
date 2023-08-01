@@ -12,20 +12,16 @@ const Home = (props) => {
   // let src = `http://192.168.224.254:168/image/${localStorage.getItem('profile')}`
   const {ip,screenSize} = useContext(CustomContext)
   // const [num, setnum] = useState(1);
-  // const [src, setscrc] = useState(null);
+  const [src, setscrc] = useState(null);
   const [detail,setdetail] =useState([]);
   const [sex, setsex] = useState();
   let id = localStorage.getItem("id");
-  // function handle() {
-  //   setnum(num + 1);
-  //   props.p(num);
-  // }
+
   useEffect(() => {
     axios
       .get(`${ip}/api/userdetail?id=${id}`)
       .then((respone) => {
-        // let data = JSON.parse(respone.data);
-        // setscrc(data.Profile);
+        setscrc(respone.data[0].Profile);
         console.log(respone.data[0]);
         setdetail(respone.data[0])
       }).catch(e=>alert(e));
@@ -33,9 +29,9 @@ const Home = (props) => {
   }, [id,ip]);
   const checksex = () => {
     if (sex !== "F") {
-      return "man_318-233556.avif";
+      return "Avatar-Transparent-Background-PNG.png";
     } else {
-      return "kisspng-portable-network-graphics-vector-graphics-customer-5c033c289a6bf4.9912322615437158806325.jpg";
+      return "163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png";
     }
   };
   return (
@@ -49,7 +45,7 @@ const Home = (props) => {
             <div className="d-flex justify-content-center t1" style={{padding:'10px 0 10px 0'}}>
 
               <div className="d-flex" style={{height:'200px',width:'200px',borderRadius:'50%',overflow:'hidden',border:'2px solid black'}}>
-                <img src={`${ip}/image/${checksex()}`} alt="" className="" style={{flexShrink:'0'}}/>
+                <img src={`${ip}/image/${src!=null?detail.Profile:checksex()}`} alt="" className="img-fluid" style={{width:'200px',height:'200px'}}/>
               </div>
 
             </div >

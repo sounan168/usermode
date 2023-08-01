@@ -8,11 +8,10 @@ import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import { BeatLoader } from "react-spinners"
 
+
 const Mobile = () => {
     const [sex, setsex] = useState();
     const {ip,setbrand,loading,setloading} = useContext(CustomContext)
-    // const [num, setnum] = useState(1);
-    // const [src, setscrc] = useState(null);
     const [detail,setdetail] =useState([]);
     let id = localStorage.getItem("id");
     const [att,setatt] = useState([])
@@ -25,17 +24,15 @@ const Mobile = () => {
         axios
           .get(`${ip}/api/userdetail?id=${id}`)
           .then((respone) => {
-            // let data = JSON.parse(respone.data);
-            // setscrc(data.Profile);
             setdetail(respone.data[0])
           }).catch(e=>alert(e));
         setsex(localStorage.getItem("sex"));
       }, [id,ip]);
       const checksex = () => {
         if (sex !== "F") {
-          return "man_318-233556.avif";
+          return "images.png";
         } else {
-          return "kisspng-portable-network-graphics-vector-graphics-customer-5c033c289a6bf4.9912322615437158806325.jpg";
+          return "163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png";
         }
       };
       function checktime() {
@@ -56,9 +53,9 @@ const Mobile = () => {
         <Container className="mt-5">
     <div className="mobile_mode" style={{margin:''}}>
         <div className="profiles">
-            <Link className="menu-items" to='/profile' onClick={()=>setbrand(false)} style={{backgroundImage:`url(${ip}/image/istockphoto-1373264972-612x612.jpg)`}}>
-                <div style={{width:'100px',height:'100px',borderRadius:'50%',overflow:'hidden',border:'2px solid black',marginLeft:'10px'}}>
-                <img src={`${ip}/image/${checksex()}`} alt="" className="" style={{flexShrink:'0',width:'100%'}}/>
+            <Link className="menu-items" to='/profile' onClick={()=>setbrand(false)} style={{backgroundImage:`url(${ip}/image/abstract-colorful-gradient-background-psd-modern-windows-desktop-wallpaper-4k-panoramic-size-2022_691560-34.avif)`}}>
+                <div style={{width:'100px',height:'100px',borderRadius:'50%',overflow:'hidden',border:'2px solid black',marginLeft:'10px'}} className="">
+                <img src={`${ip}/image/${detail.Profile!=null?detail.Profile:checksex()}`} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}} />
                 </div>
                 <div style={{}}>
                 <Form.Label className="txts fw-bold"><span style={{color:''}}>{checktime()},</span><br/> <span>{localStorage.getItem('name')}!</span></Form.Label>                         

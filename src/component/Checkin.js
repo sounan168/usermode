@@ -78,6 +78,7 @@ const Checkin = () =>{
                             <option value="1">Checkin</option>
                             <option value="2">Checkout</option>
                         </F.Select>
+                        
                         <button   className="btn btn-info btns p-2" onClick={submit} >CONFIRM</button>
                 </div>
             </div>

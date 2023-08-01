@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import { useContext } from 'react';
 import { CustomContext } from '../context/Context';
 import axios from 'axios';
+import CusInput from '../component/form/CusInput';
 const Login =()=>{
     const {ip} = useContext(CustomContext)
     const navigate = useNavigate()
@@ -87,6 +88,7 @@ const Login =()=>{
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
+       
       </Row>
     
         

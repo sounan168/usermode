@@ -19,7 +19,7 @@ const Attendance = () =>{
 
    
     useEffect(()=>{
-        axios.get(`${ip}/api/attmonthly?id=${localStorage.getItem('id')}&option=${month}`).then((e)=>
+        axios.get(`${ip}/api/attmonthly/${month}/${localStorage.getItem('id')}`).then((e)=>
         {
           setatt(e.data.data.att)
           setcount(e.data.data.count)

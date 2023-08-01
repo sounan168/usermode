@@ -15,7 +15,6 @@ function Scan() {
     const {num} = useParams()
     const {ip} = useContext(CustomContext)
     const ref = useRef(null)
-const [notice,setnotice]
 const [record,setrecord] = useState(true)
 const [loading,setloading] = useState(false)
    
@@ -34,7 +33,7 @@ const [loading,setloading] = useState(false)
                         studen:`សិស្សឈ្មោះ:${localStorage.getItem('name')}`,
                         isch:`${x.data.alert?'បានCheck in នោថ្ងៃទី:'+today+'':'អ្នកបាន​ Checkin រួចរាល់'}`
                     }
-                    setnotice(x.data.alert)
+                    
                     axios.get(`https://api.telegram.org/bot6296341388:AAFdVSv0kiOD1BJzPnkHmEFF4ipchVCYD14/sendMessage?chat_id=-1001762384795&text=${user.check} ${user.studen} ${user.isch}`).then((e)=>{
                         setloading(false)
                     }).catch((e)=>{
@@ -82,7 +81,7 @@ const [loading,setloading] = useState(false)
                        {loading?<BeatLoader color="black"/>:
                        <div style={{}}>
                        <div>
-                       <FontAwesomeIcon  style={{fontSize:'60px'}} color="green" icon={notice?faCheck:faX} />
+                       <FontAwesomeIcon  style={{fontSize:'60px'}} color="green" icon={faCheck} />
                        </div>
                        <div style={{fontSize:'35px'}} className="text-uppercase fw-bold">thank you</div>
                        </div>

@@ -3,11 +3,18 @@ import React from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 import { useEffect } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { CustomContext } from "../context/Context";
 
 export default function Profile(props) {
-    useEffect(()=>{
-        // axios.get()
-    },[])
+const {imgs,ip} = useContext(CustomContext)
+const checksex = () => {
+  if (localStorage.getItem("sex") !== "F") {
+    return "Avatar-Transparent-Background-PNG.png";
+  } else {
+    return "163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png";
+  }
+};
   return (
     <div className="" style={{ backgroundColor: '' }}>
       <MDBContainer className="container py-5 h-100">
@@ -16,8 +23,8 @@ export default function Profile(props) {
             <MDBCard style={{ borderRadius: '15px' }}>
               <MDBCardBody className="text-center">
                 <div className="mt-3 mb-4">
-                  <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"
-                    className="rounded-circle" fluid style={{ width: '100px' }} />
+                  <MDBCardImage src={`${ip}/image/${imgs!=null?imgs:checksex()}`}
+                    className="rounded-circle" fluid style={{ width: '100px' ,height:'100px' }} />
                 </div>
                 <MDBTypography tag="h4">Yen Kimloang</MDBTypography>
                 <MDBCardText className="text-muted mb-4">
