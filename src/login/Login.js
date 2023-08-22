@@ -8,7 +8,6 @@ import Row from 'react-bootstrap/Row';
 import { useContext } from 'react';
 import { CustomContext } from '../context/Context';
 import axios from 'axios';
-import CusInput from '../component/form/CusInput';
 const Login =()=>{
     const {ip} = useContext(CustomContext)
     const navigate = useNavigate()
@@ -37,12 +36,14 @@ const Login =()=>{
             localStorage.setItem('pass',e.data.data.Passwords)
             localStorage.setItem('sex',e.data.data.Sex)
             localStorage.setItem('check',e.data.alert)
+            localStorage.setItem('profile',e.data.data.Profile)
+            console.log(e.data.data.Profile)
             // localStorage.setItem('profile',e.data.profile.Profile)
             
             // console.log(localStorage.getItem('pass'))
             navigate('/home')
           }
-        }).catch(e=>{alert(e)})
+        }).catch(e=>{console.log(e)})
       
     };
 

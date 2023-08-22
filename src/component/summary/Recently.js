@@ -5,11 +5,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faCircleXmark,faCircleCheck} from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react';
 import { CustomContext } from '../../context/Context';
+import { MoonLoader } from "react-spinners"
 const Recently = () =>{
     const {ip} = useContext(CustomContext)
     const [att,setatt] = useState([])
+    const [loading, setloading] = useState(true);
     useEffect(()=>{
-        axios.get(`${ip}/api/getatt?id=${localStorage.getItem('id')}&date=3 day`).then((e)=>{
+        axios.get(`${ip}/api/getatt?id=${localStorage.getItem('id')}&date=2 day`).then((e)=>{
+        e.data.data[2].day_name='Today'
+            e.data.data[1].day_name='Yesterday'
+            setloading(false)
             setatt(e.data.data)
         }).catch(e=>alert(e));
     },[ip])
@@ -24,9 +29,9 @@ const Recently = () =>{
             <th>attend</th>
             </tr>
         </thead>
-        <tbody>
+   <tbody>
 
-           {att.map((e,i)=>{
+           {att.toReversed().map((e,i)=>{
            return(
             
                 <tr key={i}>
@@ -40,6 +45,7 @@ const Recently = () =>{
            })}
         </tbody>
       </table>
+      {loading?<div style={{display:'flex',justifyContent:'center'}}><MoonLoader/></div>:''}
     </Container>)
 }
 export default Recently

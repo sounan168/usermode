@@ -25,7 +25,7 @@ const Mobile = () => {
           .get(`${ip}/api/userdetail?id=${id}`)
           .then((respone) => {
             setdetail(respone.data[0])
-          }).catch(e=>alert(e));
+          }).catch(e=>console.log(e));
         setsex(localStorage.getItem("sex"));
       }, [id,ip]);
       const checksex = () => {

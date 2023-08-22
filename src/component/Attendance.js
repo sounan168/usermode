@@ -10,6 +10,7 @@ const Attendance = () =>{
     const [att,setatt] = useState([])
     const [month,setmonth] = useState(current_month)
     const [count,setcount] = useState([])
+    const [viewtime, setviewtime] = useState(false);
     const monthNameList = ["Janury", "Februry", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     
 
@@ -25,6 +26,7 @@ const Attendance = () =>{
           setcount(e.data.data.count)
           console.log(e.data);
           localStorage.setItem('month',e.data.data.att[0].m)
+          console.log(att)
         }
         ).catch(e=>alert(e));
         
@@ -37,7 +39,7 @@ const Attendance = () =>{
         
         <div className="row" style={{ margin: "0px 0 10px .2px" }}>
           <div className="col-md-6 p-0">
-            <h4 style={{margin:'20px 0'}} className="text-uppercase">{parseInt(month)===current_month?'current month':localStorage.getItem('month')}</h4>
+            <h4 style={{margin:'20px 0'}} className="text-uppercase">{localStorage.getItem('month')}</h4>
             <F.Select  value={month.toString()} onChange={(e)=>setmonth(e.target.value)} className="form-control">
              {monthNameList.map((e,i)=>{
               // console.log(i+1,e)
@@ -85,6 +87,7 @@ const Attendance = () =>{
                       style={{
                         whiteSpace: "nowrap",
                         padding: "5px 10px 5px 10px",
+                        border:'1px solid gray',borderTop:'none'
                       }}
                     >
                       {e.day_name}
@@ -101,6 +104,7 @@ const Attendance = () =>{
                       style={{
                         whiteSpace: "nowrap",
                         padding: "5px 10px 5px 10px",
+                        border:'1px solid gray'
                       }}
                     >
                       {e.x}
@@ -112,7 +116,17 @@ const Attendance = () =>{
                 <td style={{ padding: "15px 20px 15px 20px" }}>
                   {localStorage.getItem("name")}
                 </td>
-                {att.map((e, i) => {
+                {viewtime?att.map((e,i)=>{
+                  return(
+                    <td key={i} style={{ whiteSpace: "nowrap",
+                    fontSize: "15px",
+                    padding: "5px 10px 5px 10px",
+                    backgroundColor: "#E9FFC2",
+                    border:'1px solid gray'}}>
+                      {e.t1!=null?e.t1:'N/A'} - {e.t2!=null?e.t2:'N/A'}
+                    </td>
+                  )
+                }):att.map((e, i) => {
                   return (
                     <td
                       key={i}
@@ -121,6 +135,8 @@ const Attendance = () =>{
                         fontSize: "30px",
                         padding: "5px 10px 5px 10px",
                         backgroundColor: "#E9FFC2",
+                        borderBottom:'none',
+                    border:'1px solid gray',
                         color:
                           e.iSoff === "off"
                             ? "red"
@@ -146,7 +162,7 @@ const Attendance = () =>{
           </table>
         </div>
         <div className="mt-3">
-        <Button variant="info">View Time</Button>
+        <Button variant="info" onClick={()=>setviewtime(!viewtime)}>View Time</Button>
                 
         </div>
         <div className="row" style={{ margin: "10px 0 10px .2px" }}>
@@ -163,7 +179,7 @@ const Attendance = () =>{
                                 </tr>
                                 <tr>
                                   <td>Absent</td>
-                                  <td><FontAwesomeIcon color="red" icon={faCircleXmark}/>:{e.uncheck}</td>
+                                  <td><FontAwesomeIcon color="black" icon={faCircleXmark}/>:{e.uncheck}</td>
                                 </tr>
                               </tbody>
                           </table>

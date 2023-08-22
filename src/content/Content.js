@@ -6,7 +6,7 @@ import Checkin from '../component/Checkin'
 import Profile from '../component/Profile'
 // import { useState } from 'react'
 import Recently from '../component/summary/Recently'
-import Weekly from '../component/summary/Weekly'
+// import Weekly from '../component/summary/Weekly'
 import Scan from '../component/Scan'
 import { useContext } from 'react'
 import { CustomContext } from '../context/Context'
@@ -37,7 +37,7 @@ const Content = () =>{
         <Route element={<Layout log= {logout}/>}> 
             <Route path='/home' element={<HomePage/>}>
                 <Route index element={<Recently/>}/>
-                <Route path='/home/weekly' element={<Weekly/>}/>
+                {/* <Route path='/home/weekly' element={<Weekly/>}/> */}
             </Route>
             <Route path='/att' element={<Attendance/>}/>
             <Route path='/checkin' element={<Checkin/>}/>

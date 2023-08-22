@@ -46,14 +46,14 @@ function Layout (props){
                 <Nav className="pe-3 text-uppercase">
                   <NavLink onClick={close} className="nav-link" to='/home' >home</NavLink>
                   <NavLink onClick={close} className="nav-link" to='/att'>Attendance</NavLink>
-                  <NavLink onClick={close} className="nav-link" to='/checkin' >checkin</NavLink>
+                  {/* <NavLink onClick={close} className="nav-link" to='/checkin' >checkin</NavLink> */}
                   <NavLink onClick={close} className="nav-link" style={{display:screenSize.width<=500?'':'none'}} to='/qrscan'>scan</NavLink>
-                  <NavDropdown
+                  {/* <NavDropdown
                     title={localStorage.getItem('name')} 
                     id={`offcanvasNavbarDropdown-expand-md`}
                   >
                     <NavLink onClick={close} className="dropdown-item" to='/profile' >Manage Profile</NavLink>
-                  </NavDropdown>
+                  </NavDropdown> */}
                 </Nav>
                 <Nav className="justify-content-end flex-grow-1">
                 <Button variant="danger" onClick={props.log}>Log out</Button>

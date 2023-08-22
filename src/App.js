@@ -5,6 +5,7 @@ import Content from './content/Content';
 import { CustomContext,ip } from './context/Context';
 import { useNavigate,} from 'react-router-dom';
 import axios from 'axios';
+let src = localStorage.getItem('profile')
 // import scan from './component/scan.mp3'
 function App() {
 const [brand, setbrand] = useState(true);
@@ -22,13 +23,19 @@ const [loading, setloading] = useState(true);
       		height: window.innerHeight
     	}
   	}
+	  let check = localStorage.getItem('check')
   
   	useEffect(() => {
-		axios
+	
+		if(check){
+			axios
 		.get(`${ip}/api/userdetail?id=${localStorage.getItem("id")}`)
 		.then((respone) => {
 		  setimgs(respone.data[0].Profile);
-		}).catch(e=>alert(e));
+		 
+		}).catch(e=>console.log(e));
+		}
+		
     		const updateDimension = () => {
       			setScreenSize(getCurrentDimension())
     		}
@@ -43,7 +50,7 @@ const [loading, setloading] = useState(true);
   return (
   
     <>
-    <CustomContext.Provider value={{ip,result,screenSize,brand,setbrand,loading,setloading,imgs}}>
+    <CustomContext.Provider value={{ip,result,screenSize,brand,setbrand,loading,setloading,imgs,src}}>
         <Content/>
     </CustomContext.Provider>
       

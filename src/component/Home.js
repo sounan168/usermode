@@ -5,31 +5,37 @@ import { Outlet ,NavLink} from "react-router-dom";
 import { useContext } from 'react';
 import { CustomContext} from '../context/Context';
 import Mobile from "./MobileMode";
+import { BeatLoader,MoonLoader
+} from "react-spinners";
 // import Button from "react-bootstrap/Button";
 
 
 const Home = (props) => {
-  // let src = `http://192.168.224.254:168/image/${localStorage.getItem('profile')}`
-  const {ip,screenSize} = useContext(CustomContext)
+  //let src = `http://192.168.224.254:168/image/${localStorage.getItem('profile')}`
+  const {ip,screenSize,src} = useContext(CustomContext)
   // const [num, setnum] = useState(1);
-  const [src, setscrc] = useState(null);
+  // const [src, setscrc] = useState(null);
   const [detail,setdetail] =useState([]);
   const [sex, setsex] = useState();
+  const [loading,setloading] = useState(true)
   let id = localStorage.getItem("id");
 
   useEffect(() => {
     axios
       .get(`${ip}/api/userdetail?id=${id}`)
       .then((respone) => {
-        setscrc(respone.data[0].Profile);
+        // setscrc(respone.data[0].Profile);
         console.log(respone.data[0]);
         setdetail(respone.data[0])
+        
+        setloading(false)
       }).catch(e=>alert(e));
     setsex(localStorage.getItem("sex"));
   }, [id,ip]);
   const checksex = () => {
     if (sex !== "F") {
       return "Avatar-Transparent-Background-PNG.png";
+      
     } else {
       return "163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png";
     }
@@ -45,28 +51,36 @@ const Home = (props) => {
             <div className="d-flex justify-content-center t1" style={{padding:'10px 0 10px 0'}}>
 
               <div className="d-flex" style={{height:'200px',width:'200px',borderRadius:'50%',overflow:'hidden',border:'2px solid black'}}>
-                <img src={`${ip}/image/${src!=null?detail.Profile:checksex()}`} alt="" className="img-fluid" style={{width:'200px',height:'200px'}}/>
+               {loading?<div style={{width:'100%',height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}><MoonLoader color="black"/></div>:<img src={`${ip}/image/${src!=null?src:''}`} alt="" className="img-fluid" style={{width:'200px',height:'200px'}}/>}
               </div>
 
             </div >
             <div className="t2">
                 <table className="table text-uppercase table-borderless">
-                    <tbody>
+                   <tbody>
                         <tr>
-                          <th>name</th>
-                          <td>{localStorage.getItem('name')}</td>
+                          <th>ឈ្មោះ</th>
+                          <td>{loading?<BeatLoader color="black"/>:localStorage.getItem('name')}</td>
                         </tr>
                         <tr>
-                          <th>id</th>
-                          <td>{detail.UserID}</td>
+                          <th>អត្តលេខ</th>
+                          <td>{loading?<BeatLoader color="black"/>:detail.UserID}</td>
                         </tr>
                         <tr>
-                          <th>role</th>
-                          <td>{detail.RolesName}</td>
+                          <th>ដំណែង</th>
+                          <td>{loading?<BeatLoader color="black"/>:detail.RolesName}</td>
                         </tr>
                         <tr>
-                          <th>major</th>
-                          <td>{detail.MajorName}</td>
+                          <th>ជំនាញ</th>
+                          <td>{loading?<BeatLoader color="black"/>:detail.MajorName}</td>
+                        </tr>
+                        <tr>
+                          <th>ក្រុម</th>
+                          <td>{loading?<BeatLoader color="black"/>:detail.GroupID}</td>
+                        </tr>
+                        <tr>
+                          <th>ជំនាន់</th>
+                          <td>{loading?<BeatLoader color="black"/>:detail.GenerationID}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -84,8 +98,8 @@ const Home = (props) => {
 
           <Navbar.Brand href="#home">Summary</Navbar.Brand>
           <Nav className="me-auto text-uppercase">
-           <NavLink className="nav-link" to='/home/'>recently</NavLink>
-           <NavLink className="nav-link" to='/home/weekly'>Weekly</NavLink>
+           {/* <NavLink className="nav-link" to='/home/'>recently</NavLink> */}
+           {/* <NavLink className="nav-link" to='/home/weekly'>Weekly</NavLink> */}
           </Nav>
         </Container>
         
